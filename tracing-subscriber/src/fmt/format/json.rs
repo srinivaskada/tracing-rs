@@ -246,6 +246,7 @@ where
             if self.format.flatten_event {
                 let mut visitor = tracing_serde::SerdeMapVisitor::new(serializer);
                 event.record(&mut visitor);
+                ctx.visit_spans(&mut visitor)
 
                 serializer = visitor.take_serializer()?;
             } else {
